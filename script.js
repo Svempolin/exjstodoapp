@@ -110,7 +110,7 @@ const handleSubmit = e => {
 //     }
 // }
 
-formValidation()
+// formValidation()
 
 const removeTask = e => {
  if(!e.target.classList.contains('card')){
@@ -119,10 +119,17 @@ const removeTask = e => {
  fetch( BASE_URL + e.target.id, {
     method: 'DELETE'
  })
- .then(res = {})
+ .then(res => {
+    if (res.ok) {
+        e.target.remove()
+        const index = todos.findIndex( card => card.id == e.target.id)
+        todos.splice(index, 1)
+        console.log(todos)
+    }
+ })
 
 }
 
 
-
+userList.addEventListener('click', removeTask)
 form.addEventListener('submit', handleSubmit)
