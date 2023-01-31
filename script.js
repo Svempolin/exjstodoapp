@@ -1,4 +1,4 @@
-const BASE_URL = "https://jsonplaceholder.typicode.com/todos";
+const BASE_URL = "https://jsonplaceholder.typicode.com/todos/";
 const SCALED_URL = "https://jsonplaceholder.typicode.com/todos?page=&_limit=7";
 
 const todos= []
@@ -40,31 +40,83 @@ const todoList = () => {
 
 
 
-
 const createTodoElement = (todoData) => {
     let todo = document.createElement('div')
     todo.id = todoData.id
     todo.classList.add('card')
-    
 
-    
-    
-    
-    
-    
-    // = document.createElement('i')
-    // wastBin.classList.add('fa-fa-trash-alt')
-    // let button = document.createElement('button')
-    // button.classlist.add("btn")
-    // button.innerText = "delete"
+    let checkTodo = document.createElement('a')
+    checkTodo.className = 'fa fa-check'
+    if(todoData.completed){
+    checkTodo.clicked = true
+        todo.style.textDecoration = "line-through"
+    }
 
+    checkTodo.addEventListener('click', function() {
+
+        fetch(BASE_URL + todoData.id, {
+
+            method: 'PATCH',
+            body: JSON.stringify({completed: !todoData.completed}),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+        })
+        .then(res => res.json())
+        .then(todo => {
+            todoData.completed = todo.completed
+        })
+
+        if (todoData.completed) {
+            todo.style.textDecoration = 'line-through'
+            this.clicked = true
+            return true;
+        } if(!todoData.completed){
+            console.log('not checked');
+            todo.style.textDecoration = 'none'
+            this.clicked = false
+            return false;
+        }
+        });
+        
+        
+
+    let wastBin= document.createElement('a')
+     wastBin.className = 'fa fa-trash-alt'
+     wastBin.style.color = "red"
+    
+    wastBin.addEventListener('click', e => {
+        if(!todoData.completed){
+      
+    // HÄR SKA DET VARA EN MODAL 
+
+
+        }
+        fetch(BASE_URL + todoData.id, {
+            method:"DELETE",
+        })
+        .then(res => {
+            if(res.ok){
+                todo.remove()
+                console.log(todos.indexOf(todoData))
+                const index = todos.indexOf(todoData)
+                todos.splice(index,1)
+            }
+        })
+    })
+
+
+   
     let title = document.createElement('p')
     title.classList.add('title-stil')
     title.innerText = todoData.title
 
+
+ 
+
  todo.appendChild(title)
-//  todo.appendChild(button)
-//  todo.appendChild(wastBin)
+ todo.appendChild(wastBin)
+ todo.appendChild(checkTodo)
  return todo
 
 }
@@ -90,46 +142,15 @@ const handleSubmit = e => {
     
     .then((res) =>  res.json())
     .then((data) => {
+        // data.id = crypro.randomUUID()
         todos.push(data)
         const todoElement = createTodoElement(data)
         userList.appendChild(todoElement)
     })
-
-
-}
-
-// FUNKAR EJ 
-
-// let formValidation = () => {
-//     if (input.value === ""){
-//     msg.innerHTML = "Post cant be blank";
-//     console.log("fail")
-//     } else{
-//         console.log('Yey')
-//         msg.innerHTML = " ";
-//     }
-// }
-
-// formValidation()
-
-const removeTask = e => {
- if(!e.target.classList.contains('card')){
-    return document.innerHTML += "you ned to click on the the card"
- }
- fetch( BASE_URL + e.target.id, {
-    method: 'DELETE'
- })
- .then(res => {
-    if (res.ok) {
-        e.target.remove()
-        const index = todos.findIndex( card => card.id == e.target.id)
-        todos.splice(index, 1)
-        console.log(todos)
-    }
- })
+ form.reset()
 
 }
 
 
-userList.addEventListener('click', removeTask)
+
 form.addEventListener('submit', handleSubmit)
