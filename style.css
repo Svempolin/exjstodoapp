@@ -85,3 +85,28 @@ background-color: darkslategray
 a {
     color: lemonchiffon
 }
+
+/* .error{
+    color: red;
+} */
+
+.ModalErrorWrapper .hidden {
+    display: none;
+}
+
+.errorWrapper{
+    border: 2px solid black;
+    padding: 2rem; 
+}
+
+.errorWrapper .errorMessage button{
+    color: rgb(13, 118, 74);
+}
+
+.errorMessage{
+    color: red
+}
+
+/* #closeError{
+    display: none;
+} */

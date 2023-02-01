@@ -4,18 +4,21 @@ const SCALED_URL = "https://jsonplaceholder.typicode.com/todos?page=&_limit=7";
 const todos= []
 const userList = document.querySelector("#posts")
 const form = document.querySelector("#form")
-const input = document.querySelector('#input')
+// const input = document.querySelector('#input')
 const msg = document.querySelector('#msg')
+const input = document.querySelector('#form > input');
 
+
+
+// En Fetch som hämtar datan från databasen och gör om den till json
 
 const getTask = async () => {
     const res = await fetch(SCALED_URL)
     const data = await res.json()
-
     console.log(data)
 
     data.forEach(todo =>{
-        todos.push(todo)
+    todos.push(todo)
     })
 
     
@@ -28,17 +31,15 @@ getTask()
 
 const todoList = () => {
     userList.innerHTML = ""
-   
     todos.forEach(todo => {
     const todoElement = createTodoElement(todo)
     
     userList.appendChild(todoElement)
-    
-        
+           
     })
 }
 
-
+// DENNA SKAPAR EN NY TOFOKORT SAMT SER OM DEN ÄR KLAr ELLER EJ//
 
 const createTodoElement = (todoData) => {
     let todo = document.createElement('div')
@@ -54,12 +55,12 @@ const createTodoElement = (todoData) => {
 
     checkTodo.addEventListener('click', function() {
 
-        fetch(BASE_URL + todoData.id, {
+    fetch(BASE_URL + todoData.id, {
 
-            method: 'PATCH',
-            body: JSON.stringify({completed: !todoData.completed}),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
+    method: 'PATCH',
+    body: JSON.stringify({completed: !todoData.completed}),
+    headers: {
+         'Content-type': 'application/json; charset=UTF-8'
             },
         })
         .then(res => res.json())
@@ -72,7 +73,7 @@ const createTodoElement = (todoData) => {
             this.clicked = true
             return true;
         } if(!todoData.completed){
-            console.log('not checked');
+            console.log('not clicked');
             todo.style.textDecoration = 'none'
             this.clicked = false
             return false;
@@ -126,12 +127,25 @@ const createTodoElement = (todoData) => {
 const handleSubmit = e => {
     e.preventDefault()
 
+ // detta är valideringen (den gör så att man inte kan göra ett tomt todokort)
 
-    const createTask = {
+if(input.value.trim() === ''){
+        msg.innerText = `Your need to write a task`;
+        msg.style.display = "block";
+        return; 
+ }
+
+ // Denna gör så att texten försvinner när man skriver i formuläret igen
+
+ msg.style.display = 'none'
+
+
+
+const createTask = {
         title: document.querySelector('#input').value,
-        completed: false,
+        completed: false, 
     }
-    
+ 
     fetch(BASE_URL, {
         method:'POST',
         body: JSON.stringify(createTask),
@@ -147,9 +161,15 @@ const handleSubmit = e => {
         const todoElement = createTodoElement(data)
         userList.appendChild(todoElement)
     })
- form.reset()
 
+
+  // denna tömmer formuläret
+ form.reset()
+ 
 }
+
+
+
 
 
 

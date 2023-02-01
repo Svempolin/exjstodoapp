@@ -17,7 +17,10 @@
             <br><br>
             <input  id= "input"type="text" cols="30" rows="10">
             <br><br>
-            <div id="msg"></div>
+            <div id="msg" style = 'display: none'></div>
+            <div class="validation-feedback">
+
+              </div>
             <button type submit>Post</button>
         </form>
     </div>
@@ -44,6 +47,15 @@
               </div>
         </div>
     </div>
+</div>
+
+
+<!-- // MIN MODAL -->
+<div class="ModalErrorWrapper hidden">
+    <div class="errorMessage">
+        <p></p>
+    </div>
+    <button id="closeError"> OKEY! GOT IT!</button>
 </div>
 
    <script src="script.js"></script> 
