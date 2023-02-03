@@ -5,11 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monda&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <title>Document</title>
 </head>
 <body>
     <h1> MY TO DO APP</h1>
+    <img class="profile-pic" src="images.png" alt="profile-of-me">
 <div class="container">
     <div class="left">
         <form id="form">
@@ -17,47 +21,47 @@
             <br><br>
             <input  id= "input"type="text" cols="30" rows="10">
             <br><br>
-            <div id="msg" style = 'display: none'></div>
+          
             <div class="validation-feedback">
-
-              </div>
-            <button type submit>Post</button>
+            <div id="msg" style = 'display: none'></div>
+            </div>
+            <button class='submitBnt'>Post</button>
         </form>
     </div>
 
-
+    <div id="mainWrapper" class="main-wrapper">
+      <div id="modalCard" class="modalCard hidden">
+         <p>ERROR</p>
+     <p>
+ You have to check your todos before deleting them</p>
+     <button id="closingBtn" class="closingBtn"> CLOSE</button>
+      </div>
+     
+      <!-- <button id="openBtn" class="openBtn">POP</button> -->
+ </div> 
     <div class="right">
         <h3>YOUR POST IS HERE</h3>
         
         <div id="posts">
-            <div class="card">
+            <div class="card">  
                 <p>Hello world post 1</p>
-                <span class="options">
+              </div>
+                <div class="options">
                   <i class="fas fa-edit"></i>
                   <i class="fas-fa-trash-alt"></i>
-                </span>
-              </div>
-            
-              <div class="card">
-                <p class="o>Hello world post 2</p>
-                <span class="options">
-                  <i class="fas fa-edit"></i>
-                  <i class="fas fa-trash-alt"></i>
-                </span>
-              </div>
+                </div>
+           
         </div>
     </div>
 </div>
 
 
 <!-- // MIN MODAL -->
-<div class="ModalErrorWrapper hidden">
-    <div class="errorMessage">
-        <p></p>
-    </div>
-    <button id="closeError"> OKEY! GOT IT!</button>
-</div>
 
-   <script src="script.js"></script> 
+
+   
+
+
+<script src="script.js"></script> 
 </body>
 </html>

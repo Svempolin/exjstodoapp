@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  
 }
 
 
@@ -9,56 +10,79 @@ body{
 
 margin:0 50px;
 background-color: beige;
+display: flex;
+flex-direction: column;
+align-items: center;
+font-family: 'Monda', sans-serif;
 
 }
+
 .container{
-    display: flex;
-    gap: 10rem;
+display: flex;
+flex-direction: column;
+
+align-items: center;
+text-align: center;
+margin: 3rem;
+padding: 1rem 5rem ;
+border: 1px solid darkslategray;
+border-radius: 1rem;
+box-shadow: 2px 2px 5px 1px #88272742;
 }
 
 h1{
-    text-align: center;
-    margin-bottom: 4rem;
+text-align: center;
+margin-bottom: 4rem;
 
+}
+
+label{
+font-size: 1.5rem;
 }
 
 h3{
-    text-align: center;
-    margin-bottom: 2rem; 
+font-size: 1.5rem;
+text-align: center;
+margin-bottom: 2rem; 
 }
 
-#post{
-    width: 400px;
-}
 
-i{
-    cursor: pointer;
-}
 
 
 #posts div{
-    display: flex;
-    gap: 25px;
-    margin-bottom: 1rem;
-    
+display: flex;
+gap: 25px;
+margin-bottom: 1rem;
 
+border-radius: 0.7rem;
 }
 
 form{
-    margin-bottom: 2rem; 
+margin-bottom: 2rem; 
 }
+.submitBnt{
+       
+font-size: 1rem;
+justify-content: center;
+align-items: center;
+padding: 0.3rem 2rem;
+background-color: darkslategrey;
+border-radius: 1.9rem;
+color:rgb(235, 235, 213);
+    }
 
 #msg {
-    color:red;
+color:red;
 }
 
 
 
 input{
-    width: 20rem;
-    height: 10rem;
-    background-color: beige;
-    margin-top: 1rem; 
+width: 20rem;
+height: 5rem;
+background-color: rgb(235, 235, 213);
+margin-top: 1rem; 
+border-radius: 0.7rem;
   
 }
 
@@ -66,47 +90,73 @@ input{
 border:1.5px solid black;
 padding:10px;
 display: flex;
-justify-content: flex-end;
-background-color: darkslategray
-
+background-color: rgb(235, 235, 213);
+box-shadow: 2px 2px 5px 1px #88272742;
+justify-content: space-between;
 }
 
+
+
+
 .title-stil {
-    display: flex;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    justify-content: flex-start;
-    color:white
+display: flex;
+color:darkslategray;
 }
 
 .btn{
  padding: 10px;
 }
 
-a {
-    color: lemonchiffon
+ions{
+border: 2px solid black;
+display: flex;
+justify-content: flex-end ;
 }
 
-/* .error{
-    color: red;
-} */
+.profile-pic {
+width: 14rem;
+height: 14rem;
+border-radius: 50%;
+border: 2px solid white;
+}
+
+
+
 
 .ModalErrorWrapper .hidden {
-    display: none;
+display: none;
 }
 
-.errorWrapper{
-    border: 2px solid black;
-    padding: 2rem; 
+
+
+   
+    
+.closingBtn {
+display: flex;
+width: 20%;
+justify-content: center;
+align-items: center;
+margin: 1rem;
+padding: 1rem;
+background-color: darkslategrey;
+border-radius: 1rem;
+color:rgb(235, 235, 213);
 }
 
-.errorWrapper .errorMessage button{
-    color: rgb(13, 118, 74);
+.modalCard{
+display: flex;
+flex-direction: column;
+width: 500px;
+
+padding:1rem 2rem 1rem 2rem ;
+justify-content: center;
+align-items: center;
+font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+line-height: 1.6rem;
+border-radius: 1rem;
+box-shadow: 2px 2px 5px 1px #88272742;
 }
 
-.errorMessage{
-    color: red
-}
-
-/* #closeError{
-    display: none;
-} */
+.hidden{
+display: none;
+} 

@@ -1,12 +1,16 @@
 const BASE_URL = "https://jsonplaceholder.typicode.com/todos/";
 const SCALED_URL = "https://jsonplaceholder.typicode.com/todos?page=&_limit=7";
-
+const opitions = document.querySelector('.options')
 const todos= []
 const userList = document.querySelector("#posts")
 const form = document.querySelector("#form")
 // const input = document.querySelector('#input')
 const msg = document.querySelector('#msg')
 const input = document.querySelector('#form > input');
+const popBtn = document.querySelector("#openBtn")
+const modalCard=document.querySelector("#modalCard")
+const closingBtn = document.querySelector("#closingBtn")
+const wrapper = document.querySelector("#mainWrapper")
 
 
 
@@ -20,8 +24,6 @@ const getTask = async () => {
     data.forEach(todo =>{
     todos.push(todo)
     })
-
-    
 
    todoList() 
 
@@ -39,85 +41,100 @@ const todoList = () => {
     })
 }
 
+
 // DENNA SKAPAR EN NY TOFOKORT SAMT SER OM DEN ÄR KLAr ELLER EJ//
 
 const createTodoElement = (todoData) => {
     let todo = document.createElement('div')
-    todo.id = todoData.id
     todo.classList.add('card')
+
+    let todoCard =document.createElement('div')
+    todo.id = todoData.id
+    todoCard.classList.add('todoCard-id')
+
+    let title = document.createElement('p')
+    title.classList.add('title-stil')
+    title.innerText = todoData.title
 
     let checkTodo = document.createElement('a')
     checkTodo.className = 'fa fa-check'
+
     if(todoData.completed){
     checkTodo.clicked = true
         todo.style.textDecoration = "line-through"
     }
 
     checkTodo.addEventListener('click', function() {
-
-    fetch(BASE_URL + todoData.id, {
-
-    method: 'PATCH',
-    body: JSON.stringify({completed: !todoData.completed}),
-    headers: {
-         'Content-type': 'application/json; charset=UTF-8'
+        fetch(BASE_URL + todoData.id, {
+            method: 'PATCH',
+            headers: {
+            'Content-type': 'application/json; charset=UTF-8'
             },
+            body: JSON.stringify({completed: !todoData.completed
+            }), // updaterar den till den inte är true || false
         })
         .then(res => res.json())
-        .then(todo => {
-            todoData.completed = todo.completed
-        })
+        .then(data => {
 
-        if (todoData.completed) {
-            todo.style.textDecoration = 'line-through'
-            this.clicked = true
-            return true;
-        } if(!todoData.completed){
-            console.log('not clicked');
-            todo.style.textDecoration = 'none'
-            this.clicked = false
-            return false;
-        }
+            todoData.completed = data.completed 
+
+            console.log(todoData)
+            console.log(data)
+            if (todoData.completed) {
+                wastBin.style.color = "darkslategray"
+                todo.style.textDecoration = 'line-through'
+                todo.style.color = 'white'
+                console.log(todo)
+                this.clicked = true
+                console.log(todoData.completed)
+                return true  
+              }   
+              if(!todoData.completed){
+                console.log('not clicked');
+                todo.style.textDecoration = 'none'
+                this.clicked = false
+                return false;
+            } 
+        })
+        
         });
         
-        
-
     let wastBin= document.createElement('a')
-     wastBin.className = 'fa fa-trash-alt'
-     wastBin.style.color = "red"
-    
+    wastBin.className = 'fa fa-trash-alt '
+   
     wastBin.addEventListener('click', e => {
+        console.log(todoData)
         if(!todoData.completed){
-      
-    // HÄR SKA DET VARA EN MODAL 
-
-
-        }
-        fetch(BASE_URL + todoData.id, {
-            method:"DELETE",
-        })
-        .then(res => {
-            if(res.ok){
+            wastBin.style.color = "red" 
+        modalCard.classList.toggle("hidden")
+          
+        return 
+    
+        } 
+        (todoData.completed)
+            console.log("item is completed")
+           
+            fetch(BASE_URL + todoData.id, {
+                method:"DELETE",
+            })
+            .then(res => {
+                if(res.ok){
                 todo.remove()
                 console.log(todos.indexOf(todoData))
                 const index = todos.indexOf(todoData)
                 todos.splice(index,1)
-            }
-        })
+                  
+                }
+            })
     })
-
-
    
-    let title = document.createElement('p')
-    title.classList.add('title-stil')
-    title.innerText = todoData.title
 
 
- 
+todo.appendChild(checkTodo)
+todo.appendChild(title)
+todo.appendChild(wastBin)
 
- todo.appendChild(title)
- todo.appendChild(wastBin)
- todo.appendChild(checkTodo)
+
  return todo
 
 }
@@ -170,7 +187,8 @@ const createTask = {
 
 
 
-
-
-
+closingBtn.addEventListener("click", hideBtn)
+function hideBtn() {
+ modalCard.classList.add("hidden")
+}
 form.addEventListener('submit', handleSubmit)
